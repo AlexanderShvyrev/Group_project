@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Dashboard</title>
+</head>
+<body style=background-color:rgb(68,161,211)>
+    <a href='/logout'>Log out</a>
+    <h3>Welcome {{request.session.user_nickname}}!</h3>
+    <a href='/users/update/{{current_user.id}}'>Edit Profile</a>
+    <h1>Manage Users</h1>
+
+    {% if current_user.admin == True %}
+    <a href='/users/new'>Add new</a>
+    {% endif %}
+    
+    
+    <br>
+    <table>
+        <thead>
+            
+            <th>ID</th>
+            <th>Nickname</th>
+            <th>Email</th>
+            <th>Gender</th>
+            <th>Created_at</th>
+            <th>Age</th>
+            <th>Power level</th>
+            {% if current_user.admin == True %}
+            <th>Actions</th>
+            {% endif %}
+
+        </thead>
+        {% for user in all_users %}
+        <tr>
+            <td>{{user.id}}</td>
+            <td><a href='/users/show/{{user.id}}'>{{user.nickname}}</a></td>
+            <td>{{user.email}}</td>
+            
+            {% if user.gender == False %}
+            <td>Male</td>
+            {% else %}
+            <td>Female</td>
+            {% endif %}
+            <td>{{user.created_at}}</td>
+            <td>{{user.age}}</td>
+            {% if user.admin == True %}
+            <td>admin</td>
+            {% else %}
+            <td>normal</td>
+            {% endif %}
+            
+            {% if current_user.admin == True %}
+            <td><a href='/users/update/{{user.id}}'>edit</a>  /  <a class='delete_user' href='/users/remove/{{user.id}}'>remove</a></td>
+            {% endif %}  
+        </tr>
+        {% endfor %}
+    </table>
+    <form class="search" method="GET" action="/users/search_results" >
+        {% csrf_token %}
+        <input class="add_your_class" type="search" name="search"> 
+        <button class="add_your_class" type="submit"> Search </button>
+    </form>
+        
+        
+
+    <script>
+        const links = document.querySelectorAll('.delete_user');
+
+        links.forEach((link) => {
+            link.addEventListener("click", function(event) {
+            event.preventDefault();
+            const link = event.target.href;
+        
+            var r = confirm("Are you sure you want to remove this user?");
+        
+            if (r == true) {
+                window.location.href = link;
+            }
+        });
+    })
+    </script>
+    
+</body> 
+</html>

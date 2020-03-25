@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/edit.css' %}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Edit</title>
+</head>
+<body style=background-color:rgb(68,161,211)>
+    <a href='/logout'>Log out</a>  /  <a href='/dashboard'>Return to dashboard</a>
+    {% if current_user.admin == True %}
+    <h1>Edit user {{user_id}}</h1>
+    {% else %}
+    <h1>Edit profile</h1>
+    {% endif %}
+    {% for message in messages %}
+    <p style=color:crimson>{{message}}</p>
+    {% endfor %}
+    
+    <form action='/users/{{user.id}}/update_info' method='POST' id='pleasemakeitend' enctype='multipart/form-data'>
+        {% csrf_token %}
+        <fieldset>
+            <label for="myfiles">Select a file:</label>
+            <input type="file" accept='image/*' id="myfiles" name="myfiles">
+            <legend>Edit information:</legend>
+            <label for="lname">Nickname:</label><br>
+            <input style=background-color:cornsilk type="text" id="nickname" name="nickname" value='{{user.nickname}}'><br>
+            
+            <label for="lname">Email:</label><br>
+            <input style=background-color:cornsilk type="text" id="email" name="email" value='{{user.email}}'><br>
+            {% if current_user.admin == True %}
+            <select style=background-color:cornsilk name='admin_status'>
+                <option value='-1'>Select one</option>
+                <option>Admin</option>
+                <option>Normal</option>
+            </select>
+            {% endif %}
+            <input type="submit" value="Submit">
+        </fieldset>
+    </form>
+    <form action='/users/{{user.id}}/update_password' method='POST'>
+        {% csrf_token %}
+        <fieldset>
+            <legend>Change Password</legend>
+            <label for='password'>New password</label><br>
+            <input style=background-color:cornsilk type="password" id="password" name="password"><br>
+            <label for='confirm_password'>Confirm password</label><br>
+            <input style=background-color:cornsilk type="password" id="confirm_password" name="confirm_password"><br>
+            <input type="submit" value="Submit">
+        </fieldset>
+    </form>
+    {% if current_user.admin == False %}
+    <form action='/users/{{user.id}}/update_description' method='POST'>
+        {% csrf_token %}
+        <fieldset>
+            
+            <legend>Description</legend>
+            <textarea style=background-color:cornsilk name='description'>{{user.description}}</textarea><br>
+            <input type="submit" value="Submit">
+            
+        </fieldset>
+    </form>
+    {% endif %}
+
+
+
+
+
+
+
+
+
+</body>
+</html>

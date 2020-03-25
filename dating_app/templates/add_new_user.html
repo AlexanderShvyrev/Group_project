@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body style=background-color:rgb(68,161,211)>
+    <a href='/dashboard'>Return to Dashboard</a>
+    <br>
+    <h1>Add a new user</h1>  
+    {% for message in messages %}
+    <p>{{message}}</p>
+    {% endfor %}
+    <form action='/register/new' method='POST'>
+        {% csrf_token %}
+        First name:<br> <input style=background-color:cornsilk type='text' name='first_name'><br>
+        Last name:<br> <input style=background-color:cornsilk type='text' name='last_name'><br>
+        Email:<br> <input style=background-color:cornsilk type='email' name='email'><br>
+        Description:<br> <textarea style=background-color:cornsilk type='text' name='description'></textarea><br><br>
+        Password:<br> <input style=background-color:cornsilk type='password' name='password'><br>
+        Confirm password:<br> <input style=background-color:cornsilk type='password' name='confirm_password'><br>
+        <button style=background-color:darkkhaki type='submit'>Create</button>               
+    </form>
+
+</body>
+</html>

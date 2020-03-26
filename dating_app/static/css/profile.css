@@ -1,0 +1,152 @@
+body {
+    background-image: url(https://images.squarespace-cdn.com/content/v1/55aa0163e4b0f765fc46dcd4/1583359881014-YC9D1F4338X6VEH2T24D/ke17ZwdGBToddI8pDm48kEFzZRBKYdHYyfdvfYGvtHN7gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z5QPOohDIaIeljMHgDF5CVlOqpeNLcJ80NK65_fV7S1UfymyCyK2tGciIEllbVQRlmC__6tddkV6TbwR0NZIC-OMJTE_HTz9nYQd4LxmLSvQg/toilet-paper-3964492_1920.jpg?format=2500w);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+    background-size:  1920px 1080px;
+    overflow-x: hidden;
+    direction: ltr;
+    font: 87.5%/1.3572 -apple-system,"San Francisco","Helvetica Neue",Roboto,"Segoe WP","Segoe UI",sans-serif;
+    text-size-adjust: none;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 1.35;
+    font-family: "Galano",Georgia,Times,serif;
+    color: #333;
+    text-rendering: optimizeLegibility;
+    vertical-align: baseline;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    outline: 0;
+    border: 0;
+}
+
+.nav-block{
+    display: flex;
+    justify-content: left;
+    align-items: left;
+    flex: 1 1 auto;
+    max-width: 100%;
+    padding: 15px;
+
+    
+}
+
+.nav-block_content{
+    /* max-width: 544px; */
+    display: block;
+    /* width: 100%; */
+    padding: 16px 16px 12px;
+    text-align: center;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 10px;
+    outline: 0;
+    border-radius: 10px;
+    background: 0 0;
+    /* background-color: #ffffff; */
+    opacity: 0.7;
+}
+
+.access-block_action{
+    vertical-align: baseline;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    outline: 0;
+    border: 0;
+    
+}
+
+.access-block_action-desktop{
+    display: -webkit-flex;
+    display: flex;
+    /* -webkit-justify-content: center; */
+    justify-content: left;
+    vertical-align: baseline;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    outline: 0;
+    border: 0;
+}
+
+.app-entry-points{
+    display: flex;
+    vertical-align: baseline;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    outline: 0;
+    border: 0;
+}
+
+.app-entry-points_action{
+    min-width: 140px;
+    vertical-align: baseline;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    outline: 0;
+    border: 0;
+}
+
+.button{
+    position: relative;
+    display: inline-block;
+    vertical-align: top;
+    height: 36px;
+    margin: 0;
+    /* padding: 0 16px; */
+    outline: 0;
+    border: 0 solid transparent;
+    border-radius: 10px;
+    background: #2d4142;
+    color: #fec1c1;
+    text-decoration: none;
+    font-weight: 600;
+    font-family: "Galano",Georgia,Times,serif;
+    transition: all .2s cubic-bezier(.75,.25,.25,.75);
+    appearance: none;
+    cursor: pointer;
+    /* user-select: none; */
+    text-align: center;
+    /* box-sizing: border-box; */
+}
+
+.button-logout{
+    border: 2px solid #fff;
+    width: auto;
+    display: block;
+    max-width: 320px;
+    text-align: center;
+    padding-top: 15px;
+}
+
+.button-dahsboard{
+    border: 2px solid #fec1c1;
+    background: #fff;
+    color: #333;
+    width: auto;
+    display: block;
+    max-width: 320px;
+    text-align: center;
+    padding-top: 15px;
+}
+
+.app-entry-points_action+.app-entry-points_action{
+    margin-left: 50px;
+}
+
+.hero-block__inner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 1 1 auto;
+    max-width: 100%;
+    padding: 124px;
+    vertical-align: baseline;
+    box-sizing: border-box;
+
+}

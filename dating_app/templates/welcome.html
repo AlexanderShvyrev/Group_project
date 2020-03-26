@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/welcome.css' %}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <div class="covid-container">
+    <h1>COVID Match.com</h1>
+    </div>
+
+    <div class="access-block">
+        <div class="access-block_content">
+            <h1 class="access-block_title">
+                <span class="access-block_title-text"> Make the first move</span>
+            </h1>
+        <div class="access-block_text">
+            "Start meeting new people in your area! If you already have an account, sign in to use COVID Match.com on the web.
+        </div>
+        <div class="access-block_action">
+            <div class="access-block_action-desktop">
+                <div class="app-entry-points">
+                    <div class="app-entry-points_action">
+                        <a class="button button-Join" href='/to_register'>Join</a>
+                    </div>
+                <div class="app-entry-points_action">
+                        <a class="button button-login" href='/to_login'>Login</a>
+                </div>   
+                </div>
+            </div>
+        </div>
+        </div>
+    </div>
+
+</body>
+
+</html>

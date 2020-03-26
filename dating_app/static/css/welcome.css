@@ -1,0 +1,190 @@
+body {
+    background-image: url(https://media.wired.com/photos/5e693d6c5ebfd30008a8e659/master/w_2560%2Cc_limit/Cul-maskkiss-1206215300.jpg);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+    background-size:  1886px 894px;
+    overflow-x: hidden;
+    direction: ltr;
+    font: 87.5%/1.3572 -apple-system,"San Francisco","Helvetica Neue",Roboto,"Segoe WP","Segoe UI",sans-serif;
+    text-size-adjust: none;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 1.35;
+    font-family: "Galano",Georgia,Times,serif;
+    color: #333;
+    text-rendering: optimizeLegibility;
+    vertical-align: baseline;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    outline: 0;
+    border: 0;
+}
+
+.covid-container{
+    display: flex;
+    justify-content: left;
+    align-items: left;
+    flex: 1 1 auto;
+    max-width: 100%;
+    padding: 0px;
+    margin-left: 165px;
+    margin-top: 5px;
+    color: #333
+    
+}
+
+.access-block{
+    display: flex;
+    justify-content: left;
+    align-items: left;
+    flex: 1 1 auto;
+    max-width: 100%;
+    padding: 25px;
+    
+}
+
+.access-block_content{
+    max-width: 544px;
+    display: block;
+    width: 100%;
+    padding: 16px 16px 12px;
+    text-align: center;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 40px;
+    outline: 0;
+    border-radius: 10px;
+    background: 0 0;
+    background-color: #ffffff;
+    opacity: 0.7;
+}
+
+h1 {
+    font-weight: 600;
+    font-size: 32.4px;
+    line-height: .99;
+    margin: 0;
+    padding: 0;
+    font-family: "Galano",Georgia,Times,serif;
+    box-sizing: border-box;
+    outline: 0;
+    border: 0;
+    display: block;
+    font-size: 2em;
+    margin-block-start: 0.67em;
+    margin-block-end: 0.67em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    font-weight: bold;
+}
+
+.access-block_text{
+    display: block;
+    margin-top: 12px;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    outline: 0;
+    border: 0;
+    
+}
+
+.access-block_action{
+    vertical-align: baseline;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    outline: 0;
+    border: 0;
+    
+}
+
+.access-block_text+.access-block_action{
+    margin-top: 32px;
+}
+
+.access-block_action-desktop{
+    display: -webkit-flex;
+    display: flex;
+    /* -webkit-justify-content: center; */
+    justify-content: center;
+    vertical-align: baseline;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    outline: 0;
+    border: 0;
+}
+
+.app-entry-points{
+    display: flex;
+    vertical-align: baseline;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    outline: 0;
+    border: 0;
+}
+
+.app-entry-points_action{
+    min-width: 140px;
+    vertical-align: baseline;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    outline: 0;
+    border: 0;
+}
+
+.button{
+    position: relative;
+    display: inline-block;
+    vertical-align: top;
+    height: 36px;
+    margin: 0;
+    /* padding: 0 16px; */
+    outline: 0;
+    border: 0 solid transparent;
+    border-radius: 10px;
+    background: #fec1c1;
+    color: #333;
+    text-decoration: none;
+    font-weight: 600;
+    font-family: "Galano",Georgia,Times,serif;
+    transition: all .2s cubic-bezier(.75,.25,.25,.75);
+    appearance: none;
+    cursor: pointer;
+    /* user-select: none; */
+    text-align: center;
+    /* box-sizing: border-box; */
+}
+
+.button-Join{
+    border: 2px solid #fff;
+    width: auto;
+    display: block;
+    max-width: 320px;
+    text-align: center;
+    padding-top: 15px;
+}
+
+.button-login{
+    border: 2px solid #fec1c1;
+    background: #fff;
+    color: #333;
+    width: auto;
+    display: block;
+    max-width: 320px;
+    text-align: center;
+    padding-top: 15px;
+}
+
+.app-entry-points_action+.app-entry-points_action{
+    margin-left: 16px;
+}
+
+
+
+

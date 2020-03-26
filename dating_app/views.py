@@ -126,10 +126,9 @@ def update_info (request, user_id):
     #     for key, value in errors.items():
     #         messages.error(request, value)
     #     return redirect(f'/users/update/{user.id}')
-    if 'myfiles' in request.FILES :
-        request.FILES['myfiles']
+    if 'myfiles' in request.FILES:
         user.photo=request.FILES['myfiles']
-        User.objects.create(photo=request.FILES['myfiles'])
+        print (request.FILES)
     
     # if request.POST['admin_status'] and request.POST['admin_status']=='Admin':
     #     user.admin=True
@@ -170,7 +169,7 @@ def user_profile(request, user_id):
         'current_user': User.objects.get(id = request.session['user_id']),
         'user': User.objects.get(id=user_id),
         'all_messages': Message.objects.filter(id=user_id),
-        'all_comments': Profile_page.objects.all()
+        
     }
     return render(request, 'profile.html', context)
 

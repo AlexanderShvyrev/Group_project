@@ -1,38 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Registration</title>
 </head>
-<body style=background-color:rgb(68,161,211)>
-    <h1>Registration</h1>
-    {% for message in messages %}
-    <p>{{message}}</p>
-    {% endfor %}
-    <form action='/register' enctype='multipart/form-data' method='POST'>
-        {% csrf_token %}
-        First name: <br> <input style=background-color:cornsilk type='text' name='first_name'><br><br>
-        Last name: <br> <input style=background-color:cornsilk type='text' name='last_name'><br><br>
-        Nickname: <br> <input style=background-color:cornsilk type='text' name='nickname'><br><br>
-        Email: <br> <input style=background-color:cornsilk type='email' name='email'><br><br>
-        Describe yourself:<br> <textarea style=background-color:cornsilk type='text' name='description'></textarea><br><br>
-        Age:<br> <input style=background-color:cornsilk type="number"  name="age" min="18" max="999999999999999">
-        Gender: <select style=background-color:cornsilk name='gender'>
-            <option value='-1'>Select one</option>
-            <option>Male</option>
-            <option>Female</option>
-        </select><br><br>
-            <label for="myfiles">Select a file:</label>
-            <input type="file" accept='image/*' id="myfiles" name="myfiles"><br>
-        Password: <br> <input style=background-color:cornsilk type='password' name='password'><br><br>
-        Confirm <br> password: <br> <input style=background-color:cornsilk type='password' name='confirm_password'><br><br>
-        <button style=background-color:darkkhaki type='submit'>Register</button>               
-    </form>
+<body>
+    <div class="form-block">
+        <div class="form-block__content">
 
-    <br>
-    <br>
-    <a href='/'>Already have an account? Login</a>
+            <h1>Registration</h1>
+            {% for message in messages %}
+            <p>{{message}}</p>
+            {% endfor %}
+            
+            <div class = "sign_in">
+            <form action='/register' method='POST'>
+                {% csrf_token %}
+                First name: <br> <input type='text' name='first_name'><br><br>
+                Last name: <br> <input  type='text' name='last_name'><br><br>
+                Nickname: <br> <input  type='text' name='nickname'><br><br>
+                Email: <br> <input  type='email' name='email'><br><br>
+                Describe yourself:<br> <textarea  type='text' name='description'></textarea><br><br>
+                Age:<br> <input type="number"  name="age" min="18" max="999999999999999">
+                Gender: <select name='gender'>
+                    <option value='-1'>Select one</option>
+                    <option>Male</option>
+                    <option>Female</option>
+                </select><br>
+                    <label for="myfiles">Select a file:</label>
+                    <input type="file" accept='image/*' id="myfiles" name="myfiles"><br>
+                Password: <br> <input  type='password' name='password'><br><br>
+                Confirm <br> password: <br> <input type='password' name='confirm_password'><br><br>
+                <button type='submit'>Register</button>               
+            </form>
+            </div>
+            <br>
+            <br>
+            <a id ="register_link" href='/'>Already have an account? Login</a>
+        </div>
+    </div>
+
 </body>
 </html>

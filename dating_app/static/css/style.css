@@ -1,7 +1,139 @@
-
 body {
-    width: 95%;
+    background-image: url(https://www.jakpost.travel/wimages/large/10-103094_gradient-wallpaper-hd-gradient-wallpaper-background-color.jpg);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+    background-size:  1886px 894px;
+    overflow-x: hidden;
+    direction: ltr;
+    font: 87.5%/1.3572 -apple-system,"San Francisco","Helvetica Neue",Roboto,"Segoe WP","Segoe UI",sans-serif;
+    text-size-adjust: none;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 1.35;
+    font-family: "Galano",Georgia,Times,serif;
+    color: #333;
+    text-rendering: optimizeLegibility;
+    vertical-align: baseline;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    outline: 0;
+    border: 0;
 }
+
+.form-block{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 1 1 auto;
+    max-width: 100%;
+    padding: 124px;
+
+    
+}
+
+.form-block__content{
+    max-width: 544px;
+    display: block;
+    width: 100%;
+    padding: 16px 16px 12px;
+    text-align: center;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 100px;
+    outline: 0;
+    border-radius: 10px;
+    background: 0 0;
+    background-color: #fec1c1;
+    opacity: 0.6;
+}
+
+
+
+.sign_in{
+    border-radius: 5px;
+    background-color: #f2f2f2;
+    padding: 20px;
+    display: inline-block;
+}
+
+input[type=email], select {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+input[type=password], select {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+input[type=text], select {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+input[type=number], select {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+textarea[type=text], select {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+button[type=submit] {
+    width: 100%;
+    background-color: #fec1c1;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+input {
+    float: right;
+}
+
+#register_link {
+    font-family: sans-serif;
+}
+
+
+
+
+
+
+
+
 table {
     margin-left: 100px;
     text-align: center;
@@ -17,4 +149,3 @@ th, td {
 th {
     text-align: left;
 }
-

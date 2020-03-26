@@ -132,19 +132,14 @@ def update_info (request, user_id):
     #     for key, value in errors.items():
     #         messages.error(request, value)
     #     return redirect(f'/users/update/{user.id}')
-    print(request.FILES)
-    print(request.POST)
     if 'myfiles' in request.FILES:
         user.photo=request.FILES['myfiles']
-        print (request.FILES)
-    user.save()
-    
+        user.save()
     # if request.POST['admin_status'] and request.POST['admin_status']=='Admin':
     #     user.admin=True
     # else:
     #     user.admin=False
     
-
     return redirect('/dashboard')
 
 def update_description(request, user_id):

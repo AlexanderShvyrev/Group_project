@@ -51,7 +51,7 @@
     
 </div>
 
-
+<img src='{{user.photo.url}}'>
 <h1>{{user.first_name}} {{user.last_name}}</h1>
 <h4>Registered on: {{user.created_at}}</h4>
 <h4>User ID: {{user.id}}</h4>
@@ -61,6 +61,7 @@
 {% for message in messages %}
 <p style=color:red;>{{message}}</p>
 {% endfor %}
+<a href='/users/likes/{{user.id}}'>Like this person</a>  /  <a href='/users/disliked/{{user.id}}'>Dislike this person</a>
 
 <form action='/users/show/{{user.id}}/post' method='POST'>
     {% csrf_token %}

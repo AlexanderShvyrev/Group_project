@@ -28,6 +28,10 @@ def register(request):
             User.objects.gender=True
             gender = True
         pw_hash=bcrypt.hashpw(request.POST['password'].encode(), bcrypt.gensalt()).decode()
+        # if 'myfiles' in request.FILES:
+        #     user.photo=request.FILES['myfiles']
+        #     print (request.FILES)
+        
         user = User.objects.create(
         first_name=request.POST['first_name'], 
         last_name=request.POST['last_name'], 
@@ -39,9 +43,10 @@ def register(request):
         age=request.POST['age'],
         admin=True
         )
-        
+        user.photo=request.FILES['myfiles']
         if len(User.objects.all())>1:
             user.admin=False
+            
         
         
         request.session['user_id'] = user.id
@@ -83,7 +88,8 @@ def dashboard(request):
         return redirect('/')
     context= {
         'all_users': User.objects.all(),
-        'current_user': User.objects.get(id = request.session['user_id'])
+        'current_user': User.objects.get(id = request.session['user_id']),
+
     }
     return render(request, 'dashboard.html', context)
 
@@ -126,16 +132,18 @@ def update_info (request, user_id):
     #     for key, value in errors.items():
     #         messages.error(request, value)
     #     return redirect(f'/users/update/{user.id}')
-    if 'myfiles' in request.FILES :
-        request.FILES['myfiles']
+    print(request.FILES)
+    print(request.POST)
+    if 'myfiles' in request.FILES:
         user.photo=request.FILES['myfiles']
-        User.objects.create(photo=request.FILES['myfiles'])
+        print (request.FILES)
+    user.save()
     
     # if request.POST['admin_status'] and request.POST['admin_status']=='Admin':
     #     user.admin=True
     # else:
     #     user.admin=False
-    user.save()
+    
 
     return redirect('/dashboard')
 
@@ -170,7 +178,7 @@ def user_profile(request, user_id):
         'current_user': User.objects.get(id = request.session['user_id']),
         'user': User.objects.get(id=user_id),
         'all_messages': Message.objects.filter(id=user_id),
-        'all_comments': Profile_page.objects.all()
+
     }
     return render(request, 'profile.html', context)
 
@@ -191,27 +199,6 @@ def post_text(request, user_id):
         message = Message.objects.create(message=request.POST['message'], user=user, user_page=user_for)
         return redirect(f'/users/show/{user_id}')
 
-def comment(request, user_id, message_id):
-    errors = Comment.objects.commentValidator(request.POST)
-    if len(errors)>0:
-        for key, value in errors.items():
-            messages.error(request, value)
-        return redirect (f'/users/show/{user_id}')
-    else:
-        user=User.objects.get(id=request.session['user_id'])
-        message=Message.objects.get(id=message_id)
-        comment=Comment.objects.create(
-            comment=request.POST['comment'],
-            user=user,
-            message=message)
-        return redirect(f'/users/show/{user_id}')
-
-def delete_comment(request, comment_id, user_id):
-    User.objects.get(id=request.session['user_id'])
-    comment=Comment.objects.get(id=comment_id)
-    if comment.user.id == request.session['user_id']:
-        comment.delete()
-    return redirect(f'/users/show/{user_id}')
 
 def delete_message(request, message_id, user_id):
     User.objects.get(id=request.session['user_id'])
@@ -220,4 +207,52 @@ def delete_message(request, message_id, user_id):
         message.delete()
     return redirect(f'/users/show/{user_id}')
 
+def results_page(request):
+    if request.method == 'GET':
+        x = {'Female': True, 'Male': False}
+        query=request.GET.get('search')
+        submitbutton=request.GET.get('submit')
+        if query is not None and query == 'Male' or query == 'Female':
+            result1= User.objects.filter(gender = x[request.GET['search']]).distinct()
+            context={
+                'result1': result1,
+                'submitbutton': submitbutton
+            }
+            return render(request, 'search.html', context)
+        else:
+            return redirect ('/dashboard')
+    else:
+        return render(request, 'search.html', context)
+
+def results_age(request):
+    if request.method=='GET':
+        age=request.GET.get('age')
+
+        context={
+            'result2':User.objects.filter(age = age).distinct(),
+        }
+        return render(request, 'search.html', context)
+    else:
+        return redirect('/dashboard')
+
+def add_to_favorites(request, user_id):
+    user=User.objects.get(id=request.session['user_id'])
+    liked_user=User.objects.get(id=user_id)
+    user.likes.add(liked_user)
+    print(request.POST)
+    return redirect('/dashboard')
+
+def remove_from_favorites(request, user_id):
+    user=User.objects.get(id=request.session['user_id'])
+    liked_user=User.objects.get(id=user_id)
+    user.likes.remove(liked_user)
+    return redirect('/dashboard')
+
+def match(request, user_id):
+    user=User.objects.get(id=request.session['user_id'])
+    liked_user=User.objects.filter(likes=request.session['user_id'])
+    if user.id in liked_user.likes:
+        return redirect(f'/users/show/{user.id}')
+    else:
+        redirect('/dashboard')
 

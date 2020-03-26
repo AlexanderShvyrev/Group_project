@@ -98,7 +98,7 @@ class User(models.Model):
     email=models.CharField(max_length=254)
     age=models.IntegerField()
     nickname=models.CharField(max_length=60)
-    photo=models.ImageField(upload_to='profile_images', blank=True)
+    photo=models.ImageField(upload_to='profile_images')
     gender=models.BooleanField()
     password=models.CharField(max_length=255)
     likes = models.ManyToManyField('User', related_name="matches")
@@ -113,13 +113,4 @@ class Message(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     objects=MessageManager()
 
-
-
-# class Comment(models.Model):
-#     comment=models.TextField()
-#     # user = models.ForeignKey(User, related_name='comments', on_delete=models.CASCADE)
-#     # message=models.ForeignKey(Message, related_name='comments', on_delete=models.CASCADE)
-#     created_at = models.DateTimeField(auto_now_add=True)
-#     updated_at = models.DateTimeField(auto_now=True)
-#     objects = CommentManager()
 

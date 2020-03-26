@@ -25,7 +25,7 @@
     <table>
         <thead>
 
-            <th>ID</th>
+            <th></th>
             <th>Nickname</th>
             <th>Email</th>
             <th>Gender</th>
@@ -39,7 +39,7 @@
         </thead>
         {% for user in all_users %}
         <tr>
-            <td>{{user.id}}</td>
+            <td><img src='{{user.photo.url}}'></td>
             <td><a href='/users/show/{{user.id}}'>{{user.nickname}}</a></td>
             <td>{{user.email}}</td>
 
@@ -63,6 +63,14 @@
         </tr>
         {% endfor %}
     </table>
+    <h3>You liked these users:</h3>
+    
+    <ul>
+        {% for user in current_user.likes.all %}
+        <li>{{user.nickname}}  <a href='/users/match/{{user.id}}'>Check if you match:</a></li>
+        {% endfor %}
+    </ul>
+    
 
 
     <fieldset>

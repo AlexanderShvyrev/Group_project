@@ -1,14 +1,14 @@
-
-from django.shortcuts import render, redirect, HttpResponse
+from django.shortcuts import render, redirect
 from django.contrib import messages
-from django.db.models import Q
 from . models import*
 import bcrypt
 
-
 # Create your views here.
 def index(request):
-    return render(request,'login.html')
+    return render(request,'welcome.html')
+
+def takes_to_login(request):
+    return render(request, 'login.html')
 
 def takes_to_register_page(request):
     return render(request, 'register.html')
@@ -59,7 +59,7 @@ def login(request):
         user = user[0]
         if not bcrypt.checkpw(request.POST['password'].encode(), user.password.encode()):
             messages.error(request, 'Passwords do not match')
-            return redirect('/')
+            return redirect('/to_login')
         else:
             request.session['user_id'] = user.id
             request.session['user_first_name']=user.first_name
@@ -67,7 +67,7 @@ def login(request):
             request.session['user_email']=user.email
             request.session['user_nickname']=user.nickname
         return redirect('/dashboard')
-    return redirect('/')
+    return redirect('/to_login')
 
 def logout(request):
     del request.session['user_id']
@@ -126,18 +126,16 @@ def update_info (request, user_id):
     #     for key, value in errors.items():
     #         messages.error(request, value)
     #     return redirect(f'/users/update/{user.id}')
-    print(request.FILES)
-    print(request.POST)
-    if 'myfiles' in request.FILES:
+    if 'myfiles' in request.FILES :
+        request.FILES['myfiles']
         user.photo=request.FILES['myfiles']
-        print (request.FILES)
-    user.save()
+        User.objects.create(photo=request.FILES['myfiles'])
     
     # if request.POST['admin_status'] and request.POST['admin_status']=='Admin':
     #     user.admin=True
     # else:
     #     user.admin=False
-    
+    user.save()
 
     return redirect('/dashboard')
 
@@ -172,7 +170,7 @@ def user_profile(request, user_id):
         'current_user': User.objects.get(id = request.session['user_id']),
         'user': User.objects.get(id=user_id),
         'all_messages': Message.objects.filter(id=user_id),
-
+        'all_comments': Profile_page.objects.all()
     }
     return render(request, 'profile.html', context)
 
@@ -223,43 +221,3 @@ def delete_message(request, message_id, user_id):
     return redirect(f'/users/show/{user_id}')
 
 
-def results_page(request):
-    if request.method == 'GET':
-        x = {'Female': True, 'Male': False}
-        query=request.GET.get('search')
-        submitbutton=request.GET.get('submit')
-        if query is not None and query == 'Male' or query == 'Female':
-            result1= User.objects.filter(gender = x[request.GET['search']]).distinct()
-            context={
-                'result1': result1,
-                'submitbutton': submitbutton
-            }
-            return render(request, 'search.html', context)
-        else:
-
-            return redirect ('/dashboard')
-    else:
-        return render(request, 'search.html', context)
-
-def results_age(request):
-    if request.method=='GET':
-        age=request.GET.get('age')
-
-        context={
-            'result2':User.objects.filter(age = age).distinct(),
-        }
-        return render(request, 'search.html', context)
-    else:
-        return redirect('/dashboard')
-
-def add_to_favorites(request, user_id):
-    user=User.objects.get(id=request.session['user_id'])
-    liked_user=User.objects.get(id=user_id)
-    user.likes.add(liked_user)
-    return redirect('/dashboard')
-
-def remove_from_favorites(request, user_id):
-    user=User.objects.get(id=request.session['user_id'])
-    liked_user=User.objects.get(id=user_id)
-    liked_user.matches.remove(user)
-    return redirect('/dashboard')

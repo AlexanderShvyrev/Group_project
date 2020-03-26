@@ -9,13 +9,13 @@
 </head>
 
 <body style=background-color:rgb(68,161,211)>
-    {% for user in results %}
-
+    {% for user in result1 %}
     <p><a href='/users/show/{{user.id}}'>{{user.nickname}}</a></p>
-
     {% endfor %}
-
+    {% for user in result2 %}
+    <p><a href='/users/show/{{user.id}}'>{{user.nickname}} {{user.age}}</a></p>
+    {% endfor %}
+    
 </body>
 
 </html>
-

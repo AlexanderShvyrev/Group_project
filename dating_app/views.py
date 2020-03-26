@@ -1,8 +1,7 @@
-from django.shortcuts import render
 
-# Create your views here.
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, HttpResponse
 from django.contrib import messages
+from django.db.models import Q
 from . models import*
 import bcrypt
 
@@ -173,7 +172,7 @@ def user_profile(request, user_id):
         'current_user': User.objects.get(id = request.session['user_id']),
         'user': User.objects.get(id=user_id),
         'all_messages': Message.objects.filter(id=user_id),
-        'all_comments': Profile_page.objects.all()
+
     }
     return render(request, 'profile.html', context)
 
@@ -229,14 +228,38 @@ def results_page(request):
         x = {'Female': True, 'Male': False}
         query=request.GET.get('search')
         submitbutton=request.GET.get('submit')
-        if query is not None:
-            results= User.objects.filter(gender = x[request.GET['search']]).distinct()
-            context={'results': results,
-                    'submitbutton': submitbutton}
+        if query is not None and query == 'Male' or query == 'Female':
+            result1= User.objects.filter(gender = x[request.GET['search']]).distinct()
+            context={
+                'result1': result1,
+                'submitbutton': submitbutton
+            }
             return render(request, 'search.html', context)
         else:
-            return redirect('/dashboard')
+
+            return redirect ('/dashboard')
     else:
         return render(request, 'search.html', context)
 
+def results_age(request):
+    if request.method=='GET':
+        age=request.GET.get('age')
 
+        context={
+            'result2':User.objects.filter(age = age).distinct(),
+        }
+        return render(request, 'search.html', context)
+    else:
+        return redirect('/dashboard')
+
+def add_to_favorites(request, user_id):
+    user=User.objects.get(id=request.session['user_id'])
+    liked_user=User.objects.get(id=user_id)
+    user.likes.add(liked_user)
+    return redirect('/dashboard')
+
+def remove_from_favorites(request, user_id):
+    user=User.objects.get(id=request.session['user_id'])
+    liked_user=User.objects.get(id=user_id)
+    liked_user.matches.remove(user)
+    return redirect('/dashboard')

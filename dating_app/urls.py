@@ -22,5 +22,8 @@ urlpatterns = [
     path('users/<int:user_id>/update_description', views.update_description),
     path('users/show/<int:user_id>/<int:comment_id>/delete_comment', views.delete_comment),
     path('users/show/<int:user_id>/<int:message_id>/delete_message', views.delete_message),
-    path('users/search_results', views.results_page)
+    path('users/search_results', views.results_page),
+    path('users/result_page', views.results_age),
+    path('users/likes/<int:user_id>', views.add_to_favorites),
+    path('users/disliked/<int:user_id>', views.remove_from_favorites)
 ]

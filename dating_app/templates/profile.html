@@ -7,7 +7,8 @@
     <title>Profile</title>
 </head>
 <body style=background-color:rgb(68,161,211)>
-    <a href='/logout'>Log out</a>  /  <a href='/dashboard'>Return to dashboard</a>
+    <a href='/logout'>Log out</a>  /  <a href='/dashboard'>Return to dashboard</a><br>
+    <img src='{{user.photo.url}}'>
     <h1>{{user.first_name}} {{user.last_name}}</h1>
     <h4>Registered on: {{user.created_at}}</h4>
     <h4>User ID: {{user.id}}</h4>
@@ -16,8 +17,8 @@
     <h4>Nickname: {{user.nickname}}</h4>
     <h4>Age:{{user.age}}</h4>
     <h3>Leave a message for {{user.first_name}}</h3>
-    <img src='{{user.photo.url}}'>
-    
+    <a href='/users/likes/{{user.id}}'>Like this user</a>
+    <a href='/users/disliked/{{user.id}}'>Disike this user</a>
     {% for message in messages %}
     <p style=color:red;>{{message}}</p>
     {% endfor %}

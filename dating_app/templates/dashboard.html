@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     {% load static %}
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
@@ -8,6 +9,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Dashboard</title>
 </head>
+
 <body style=background-color:rgb(68,161,211)>
     <a href='/logout'>Log out</a>
     <h3>Welcome {{request.session.user_nickname}}!</h3>
@@ -17,17 +19,17 @@
     {% if current_user.admin == True %}
     <a href='/users/new'>Add new</a>
     {% endif %}
-    
-    
+
+
     <br>
     <table>
         <thead>
-            
+
             <th>ID</th>
             <th>Nickname</th>
             <th>Email</th>
             <th>Gender</th>
-            <th>Created_at</th>
+            <th>Joined</th>
             <th>Age</th>
             <th>Power level</th>
             {% if current_user.admin == True %}
@@ -40,7 +42,7 @@
             <td>{{user.id}}</td>
             <td><a href='/users/show/{{user.id}}'>{{user.nickname}}</a></td>
             <td>{{user.email}}</td>
-            
+
             {% if user.gender == False %}
             <td>Male</td>
             {% else %}
@@ -53,37 +55,61 @@
             {% else %}
             <td>normal</td>
             {% endif %}
-            
+
             {% if current_user.admin == True %}
-            <td><a href='/users/update/{{user.id}}'>edit</a>  /  <a class='delete_user' href='/users/remove/{{user.id}}'>remove</a></td>
-            {% endif %}  
+            <td><a href='/users/update/{{user.id}}'>edit</a> / <a class='delete_user'
+                    href='/users/remove/{{user.id}}'>remove</a></td>
+            {% endif %}
         </tr>
         {% endfor %}
     </table>
-    <form class="search" method="GET" action="/users/search_results" >
-        {% csrf_token %}
-        <input class="add_your_class" type="search" name="search"> 
-        <button class="add_your_class" type="submit"> Search </button>
-    </form>
-        
-        
 
+
+    <fieldset>
+        <legend>Search users</legend>
+        <form class="search" method="GET" action="/users/search_results">
+            {% csrf_token %}
+            <select style=background-color:cornsilk name='search'>
+                <option value='-1'>Select one</option>
+                <option>Male</option>
+                <option>Female</option>
+            </select><br><br>
+            <button class="add_your_class" type="submit"> Search </button>
+        </form>
+        <form method="GET" action="/users/result_page">
+            <div class="slidecontainer">
+                <p>Age: <span id="demo"></span></p>
+                <input type="range" min="18" max="50" value="50" name="age" class="slider" id="myRange">
+            </div><br>
+            <button class="add_your_class" type="submit"> Search </button>
+        </form>
+
+    </fieldset>
+    
     <script>
         const links = document.querySelectorAll('.delete_user');
 
         links.forEach((link) => {
-            link.addEventListener("click", function(event) {
-            event.preventDefault();
-            const link = event.target.href;
-        
-            var r = confirm("Are you sure you want to remove this user?");
-        
-            if (r == true) {
-                window.location.href = link;
-            }
-        });
-    })
+            link.addEventListener("click", function (event) {
+                event.preventDefault();
+                const link = event.target.href;
+
+                var r = confirm("Are you sure you want to remove this user?");
+
+                if (r == true) {
+                    window.location.href = link;
+                }
+            });
+        })
+        var slider = document.getElementById("myRange");
+        var output = document.getElementById("demo");
+        output.innerHTML = slider.value;
+
+        slider.oninput = function () {
+            output.innerHTML = this.value;
+        }
     </script>
-    
-</body> 
+
+</body>
+
 </html>

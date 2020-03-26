@@ -98,27 +98,22 @@ class User(models.Model):
     email=models.CharField(max_length=254)
     age=models.IntegerField()
     nickname=models.CharField(max_length=60)
-    photo=models.ImageField(upload_to='profile_images')
+    photo=models.ImageField(upload_to='profile_images', blank=True)
     gender=models.BooleanField()
     password=models.CharField(max_length=255)
+    likes = models.ManyToManyField('User', related_name="matches")
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     objects=UserManager()
 
 class Message(models.Model):
     message=models.TextField()
-    # user_page=models.ForeignKey(User, related_name='page', on_delete=models.CASCADE)
     user=models.ForeignKey(User, related_name='messages', on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     objects=MessageManager()
 
-class Profile_page(models.Model):
-    like = models.ManyToManyField(User, related_name="likes")
-    profile = models.ForeignKey(User, related_name='page', on_delete=models.CASCADE)
-    message = models.ForeignKey(Message, related_name='messages', on_delete=models.CASCADE)
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
+
 
 # class Comment(models.Model):
 #     comment=models.TextField()

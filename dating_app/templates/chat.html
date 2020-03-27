@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <a class="button button-dahsboard" href='/dashboard'>Dashboard</a>
+    <h1>Looks like {{user.first_name}} liked you back</h1>
+    <h3>Leave a message for {{user.first_name}}</h3>
+    {% for message in messages %}
+    <p style=color:red;>{{message}}</p>
+    {% endfor %}
+    <form action='/users/matched/{{user.id}}' method='POST'>
+        {% csrf_token %}
+        <textarea style='background-color:honeydew;' name='message' rows="5" cols="50"></textarea><br>
+        <button type='submit' id='post_message'>Post</button>
+    </form>
+
+    {% for message in all_messages %}
+    <p style=font-style:italic><a href='/users/show/{{message.user.id}}'>{{message.user.first_name}}{{message.user.last_name}}</a>
+        {{message.created_at}}</p>
+    <p style=font-size:larger>{{message.message}}
+        {% if message.user.id == request.session.user_id %}
+        <a href='/users/show/{{user.id}}/{{message.id}}/delete_message'>Delete</a>
+        {% endif %}
+        {% endfor %}
+</body>
+
+</html>

@@ -74,12 +74,7 @@ class UserManager(models.Manager):
             errors['confirm_password']='Passwords do not match'
         return errors
 
-# class CommentManager(models.Manager):
-#     def commentValidator(self, post_data):
-#         errors = {}
-#         if len(post_data['comment'])<2:
-#             errors['comment'] = 'Comment must be at least 2 characters long.'
-#         return errors
+
 
 class MessageManager(models.Manager):
     def messageValidator(self, post_data):
@@ -98,7 +93,7 @@ class User(models.Model):
     email=models.CharField(max_length=254)
     age=models.IntegerField()
     nickname=models.CharField(max_length=60)
-    photo=models.ImageField(upload_to='profile_images')
+    photo=models.ImageField(upload_to='profile_images', blank=True, null=True)
     gender=models.BooleanField()
     password=models.CharField(max_length=255)
     likes = models.ManyToManyField('User', related_name="matches")

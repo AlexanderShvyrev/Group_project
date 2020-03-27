@@ -16,14 +16,15 @@ urlpatterns = [
     path('users/<int:user_id>/update_password', views.update_password),
     path('users/show/<int:user_id>', views.user_profile),
     path('users/remove/<int:user_id>', views.remove_user),
-    path('users/show/<int:user_id>/post', views.post_text),
     path('users/<int:user_id>/update_description', views.update_description),
     path('users/show/<int:user_id>/<int:message_id>/delete_message', views.delete_message),
     path('users/search_results', views.results_page),
     path('users/result_page', views.results_age),
     path('users/likes/<int:user_id>', views.add_to_favorites),
     path('users/disliked/<int:user_id>', views.remove_from_favorites),
-    path('users/match/<int:user_id>', views.match)
+    path('users/match/<int:user_id>', views.match),
+    path('users/matched/<int:user_id>', views.post_text),
+
 
     
 ]

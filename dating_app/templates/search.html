@@ -8,7 +8,7 @@
     <title>Document</title>
 </head>
 
-<body style=background-color:rgb(68,161,211)>
+<body>
     {% for user in result1 %}
     <p><a href='/users/show/{{user.id}}'>{{user.nickname}}</a></p>
     {% endfor %}

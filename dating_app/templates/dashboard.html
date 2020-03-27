@@ -3,14 +3,14 @@
 
 <head>
     {% load static %}
-    <link rel="stylesheet" href="{% static 'css/forms.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Dashboard</title>
 </head>
 
-<body style=background-color:rgb(68,161,211)>
+<body>
     <a href='/logout'>Log out</a>
     <h3>Welcome {{request.session.user_nickname}}!</h3>
     <a href='/users/update/{{current_user.id}}'>Edit Profile</a>

@@ -29,7 +29,7 @@
         <div class="profile-block__inner">
             <div class="profile-block__content">
 
-
+                <a href='/users/likes/{{user.id}}'>Like this person</a>  /  <a href='/users/disliked/{{user.id}}'>Dislike this person</a>
 
 
 
@@ -43,42 +43,7 @@
                 
                 <h4>{{user.nickname}}</h4>
                 <h4>Description: {{user.description}}</h4>
-                <h3>Leave a message for {{user.first_name}}</h3>
-                {% for message in messages %}
-                <p style=color:red;>{{message}}</p>
-                {% endfor %}
-
-                <form action='/users/show/{{user.id}}/post' method='POST'>
-                    {% csrf_token %}
-                    <textarea style='background-color:honeydew;' name='message' rows="5" cols="50"></textarea><br>
-                    <button type='submit' id='post_message'>Post</button>
-                </form>
-
-                {% for message in all_messages %}
-                <p style=font-style:italic><a
-                        href='/users/show/{{message.user.id}}'>{{message.user.first_name}}{{message.user.last_name}}</a>
-                    {{message.created_at}}</p>
-                <p style=font-size:larger>{{message.message}}
-                    {% if message.user.id == request.session.user_id %}
-                    <a href='/users/show/{{user.id}}/{{message.id}}/delete_message'>Delete</a>
-                    {% endif %}
-                </p>
-                {% for comment in message.comments.all %}
-                <p style='font-style:italic; color:rgb(196,187,117);'><a
-                        href='/users/show/{{comment.user.id}}'>{{comment.user.first_name}}</a> replied on
-                    {{comment.created_at}}:</p>
-                <p>{{comment.comment}}
-                    {% if comment.user.id == request.session.user_id %}
-                    <a href='/users/show/{{user.id}}/{{comment.id}}/delete_comment'>Delete this</a>
-                    {% endif %}
-                </p>
-                {% endfor %}
-                <form action='/users/show/{{user.id}}/{{message.id}}/comment' method='POST'>
-                    {% csrf_token %}
-                    <textarea style='background-color:honeydew;' name='comment' rows="2" cols="50"></textarea><br>
-                    <button type='submit'>Comment</button>
-                </form>
-                {% endfor %}
+                
             </div>
         </div>
     </div>

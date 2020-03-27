@@ -9,6 +9,7 @@
 </head>
 
 <body style=background-color:rgb(68,161,211)>
+    <a class="button button-dahsboard" href='/dashboard'>Dashboard</a>  /  <a class="button button-logout" href='/logout'>log out</a>
     {% for user in result1 %}
     <p><a href='/users/show/{{user.id}}'>{{user.nickname}}</a></p>
     {% endfor %}

@@ -28,10 +28,7 @@ def register(request):
             User.objects.gender=True
             gender = True
         pw_hash=bcrypt.hashpw(request.POST['password'].encode(), bcrypt.gensalt()).decode()
-        # if 'myfiles' in request.FILES:
-        #     user.photo=request.FILES['myfiles']
-        #     print (request.FILES)
-        
+
         user = User.objects.create(
         first_name=request.POST['first_name'], 
         last_name=request.POST['last_name'], 
@@ -43,7 +40,9 @@ def register(request):
         age=request.POST['age'],
         admin=True
         )
-        user.photo=request.FILES['myfiles']
+        if 'myfiles' in request.FILES:
+            user.photo=request.FILES['myfiles']
+
         if len(User.objects.all())>1:
             user.admin=False
             
@@ -53,7 +52,7 @@ def register(request):
         request.session['user_first_name']=user.first_name
         request.session['user_last_name']=user.last_name
         request.session['user_email']=user.email
-        
+        request.session['user_nickname']=user.nickname
         user.save()
     
     return redirect('/dashboard')
@@ -89,6 +88,7 @@ def dashboard(request):
     context= {
         'all_users': User.objects.all(),
         'current_user': User.objects.get(id = request.session['user_id']),
+
 
     }
     return render(request, 'dashboard.html', context)
@@ -187,12 +187,13 @@ def post_text(request, user_id):
     if len(errors)>0:
         for key, value in errors.items():
             messages.error(request, value)
-        return redirect (f'/users/show/{user_id}')
+        return redirect (f'/users/match/{user_id}')
     else:
-        user_for=User.objects.get(id=user_id)
+        User.objects.get(id=user_id)
         user = User.objects.get(id=request.session['user_id'])
-        message = Message.objects.create(message=request.POST['message'], user=user, user_page=user_for)
-        return redirect(f'/users/show/{user_id}')
+        message=Message.objects.create(message=request.POST['message'], user=user)
+        print(message)
+        return redirect(f'/users/match/{user_id}')
 
 
 def delete_message(request, message_id, user_id):
@@ -200,7 +201,7 @@ def delete_message(request, message_id, user_id):
     message=Message.objects.get(id=message_id)
     if message.user.id == request.session['user_id']:
         message.delete()
-    return redirect(f'/users/show/{user_id}')
+    return redirect(f'/users/match/{user_id}')
 
 def results_page(request):
     if request.method == 'GET':
@@ -245,9 +246,16 @@ def remove_from_favorites(request, user_id):
 
 def match(request, user_id):
     user=User.objects.get(id=request.session['user_id'])
-    liked_user=User.objects.filter(likes=request.session['user_id'])
-    if user.id in liked_user.likes:
-        return redirect(f'/users/show/{user.id}')
+    liked_user=User.objects.filter(matches=user_id)
+    for potato in liked_user:
+        if potato.id == user.id:
+            context={
+                'current_user': User.objects.get(id = request.session['user_id']),
+                'user': User.objects.get(id=user_id),
+                'all_messages': Message.objects.all()
+            }
+            return render(request, 'chat.html', context)
     else:
-        redirect('/dashboard')
+        return redirect('/dashboard')
 
+# filter(id=user_id)
